@@ -6,6 +6,7 @@ WORKDIR /srv/
 RUN apk add \
       gcc \
       musl-dev \
+      mariadb-dev \
       python3-dev \
       libpq-dev
 
