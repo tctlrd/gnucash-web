@@ -6,7 +6,6 @@ WORKDIR /srv/
 RUN apk add \
       gcc \
       musl-dev \
-      mariadb-dev \
       python3-dev \
       libpq-dev
 
@@ -20,7 +19,7 @@ COPY ./src/ ./
 COPY ./README.md ./
 COPY --from=builder /wheels /wheels
 
-RUN apk add libpq  mariadb-client
+RUN apk add libpq mariadb-client mariadb-dev
 RUN pip install -v --no-cache /wheels/* .[pgsql,mysql] gunicorn
 RUN rm -r /wheels
 
@@ -35,4 +34,4 @@ ENV AUTH_MECHANISM=''
 ENV TRANSACTION_PAGE_LENGTH=25
 ENV PRESELECTED_CONTRA_ACCOUNT=''
 
-ENTRYPOINT ["apk", "add", "mariadb-dev", "&&", "gunicorn", "-b", "0.0.0.0", "gnucash_web.wsgi:app"]
+ENTRYPOINT ["gunicorn", "-b", "0.0.0.0", "gnucash_web.wsgi:app"]
