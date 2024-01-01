@@ -35,4 +35,4 @@ ENV AUTH_MECHANISM=''
 ENV TRANSACTION_PAGE_LENGTH=25
 ENV PRESELECTED_CONTRA_ACCOUNT=''
 
-ENTRYPOINT ["gunicorn", "-b", "0.0.0.0", "gnucash_web.wsgi:app"]
+ENTRYPOINT ["apk", "add", "mariadb-dev", "&&", "gunicorn", "-b", "0.0.0.0", "gnucash_web.wsgi:app"]
