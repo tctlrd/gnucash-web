@@ -45,7 +45,7 @@ Installation
 ------------
 
 *GnuCash Web* is [available on PyPI](https://pypi.org/project/GnuCash-Web/), so you can
-simply install it via `pip install GnuCash-Web`. Additionally, you may need to install
+simply install it via `pip install gnucash_web`. Additionally, you may need to install
 `mysql` or `psycopg2`, depending on which back end you want to use (sqlite back end is
 included in the python standard library).
 
@@ -212,22 +212,25 @@ Initialise submodules and install dependencies:
 ```sh
     git submodule init
     git submodule update
-    pip install -r requirements.txt
-
+    pip install -r src/requirements.txt
 ```
 
 Run it:
 ```sh
-    export FLASK_APP=gnucash_web
-    export FLASK_ENV=development
-    flask run
+    cd src/gnucash_web/
+    flask run --debug
 ```
 
-Build and upload package:
-```sh
-    python -m build
-    python -m twine upload dist/*
-```
+
+Make new release:
+- Update version number in *src/gnucash_web/version.txt*
+- Build and upload package
+  ```sh
+      cd src/
+      python -m build
+      python -m twine upload dist/gnucash_web-$VERSION*
+  ```
+- Tag commit and create release on GitHub
 
 Contributing
 ------------
@@ -239,7 +242,12 @@ needs and intellectual curiosity.
 
 Since *GnuCash Web* fulfills my primary use case for it, I don't expect much development
 in the near future. However, if anyone is willing to help taking this into a more
-feature-rich direction, I am motivated to work on that.
+feature-rich direction, I am motivated to work on that, though time is naturally scarce.
+
+Please note that my primary user is myself and any changes must be compatible with my
+use case and workflows. I will also not accept changes or additions that I cannot
+gauarantee to maintain in the future. Simplicity is more important to me than
+features, so please consider this and talk to me before spending time on big changes.
 
 See [Issues](https://github.com/joshuabach/gnucash-web/issues) and
 [Milestones](https://github.com/joshuabach/gnucash-web/milestones) for some ideas on how
@@ -291,7 +299,7 @@ understandable. I probably wouldn't either if I were them. Luckily, I am not!
 License
 -------
 
-Copyright © 2022 Joshua Bachmeier <joshua@bachmeier.cc>
+Copyright © 2023 Joshua Bachmeier <joshua@bachmeier.cc>
 
 This program is free software: you can redistribute it and/or modify it under the terms of
 the GNU General Public License as published by the Free Software Foundation, either
